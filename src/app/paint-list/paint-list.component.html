@@ -1,0 +1,31 @@
+<h3>Nuestras Pinturas</h3>
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Tamaño</th>
+            <th>Color</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Cantidad</th>
+            <th>Compra</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let paint of paints" [ngClass]="{'clearance': paint.clearance}">
+            <td><img width="90" class="img-thumbnail" [src]="paint.image" [alt]="paint.name"/></td>
+            <td>{{paint.name}}</td>
+            <td>{{paint.size}}</td>
+            <td>{{paint.color}}</td>
+            <td>{{paint.price | currency}}</td>    
+            <td><span class="badge badge-warning" *ngIf="paint.stock==0">SIN STOCK</span></td>
+            <td>
+                <app-input-integer [(quantity)]="paint.quantity" [max]="paint.stock" *ngIf="paint.stock" (maxReached)="maxReached($event)"></app-input-integer><!--$event es el this.max del else en la función upQuantity del input-integer.component.ts y en el paint-cart service me los va a agregar a la lista paintList declarado en el service-->
+            </td>
+            <td>
+                <button class="btn btn-primary btn-sm" (click)="addToCart(paint)">Comprar</button><!--el addToCart del click va a llamar al addToCart del paint-list.component.ts-->
+            </td>
+        </tr>
+    </tbody>
+</table>

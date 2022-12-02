@@ -1,0 +1,7 @@
+<h3>Carro de Compras</h3>
+
+<ul class="list-group">
+    <li *ngFor="let paint of (cartList$ | async)" class="list-group-item active" aria-current="true">
+    {{paint.name}} {{paint.size}}: {{paint.quantity}} 
+    </li>
+  </ul>
